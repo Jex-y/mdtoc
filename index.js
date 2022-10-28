@@ -69,21 +69,23 @@ const repeateString = (string, times) => {
     return toc;
 };
 
-const globs = core.getInput("files");
+const globs = core.getInput("files").split(" ");
 
-glob(globs, (err, files) => {
-    if (err) {
-        core.setFailed(err.message);
-    }
-    files.forEach((file) => {
-        fs.readFile(file, "utf8", (err, data) => {
-            if (err) {
-                core.setFailed(err.message);
-            }
-            fs.writeFile(file, generateToc(data), (err) => {
+globs.forEach((globPath) => {
+    glob(globPath, (err, files) => {
+        if (err) {
+            core.setFailed(err.message);
+        }
+        files.forEach((file) => {
+            fs.readFile(file, "utf8", (err, data) => {
                 if (err) {
                     core.setFailed(err.message);
                 }
+                fs.writeFile(file, generateToc(data), (err) => {
+                    if (err) {
+                        core.setFailed(err.message);
+                    }
+                });
             });
         });
     });
