@@ -58,7 +58,9 @@ const generateToc = (fileData) => {
         fileData = fileData.replace(title, newTitle);
     });
 
-    return fileData.replace(tocRegex, `$1\n${toc}$3`);
+    const output = fileData.replace(tocRegex, `$1\n${toc}$3`);
+    console.log(output);
+    return output;
 };
 
 const repeateString = (string, times) => {
