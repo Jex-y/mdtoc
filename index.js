@@ -48,12 +48,11 @@ const generateToc = (fileData) => {
         }
 
         prevDepth = depth;
+        const number = indexes.slice(1).join(".");
 
-        toc += `${repeateString(" ", (depth - 1) * 2)}- [${indexes
-            .slice(1)
-            .join(".")} ${title.slice(depth + 1)}](#${title
-            .slice(depth + 1)
-            .replace(/ /g, "-")})\n`;
+        toc += `${repeateString(" ", (depth - 1) * 2)}- [${number}${
+            number ? " " : ""
+        }${title.slice(depth + 1)}](#${id})\n`;
 
         fileData = fileData.replace(title, newTitle);
     });
@@ -70,7 +69,6 @@ const repeateString = (string, times) => {
     }
     return toc;
 };
-
 const globs = core.getInput("files").split(" ");
 
 globs.forEach((globPath) => {
