@@ -23,7 +23,7 @@ const generateToc = (fileData) => {
             .slice(1)
             .join(".")} ${title.slice(depth + 1)}`;
 
-        const id = title
+        const id = newTitle
             .toLowerCase()
             .replace(/ /g, "-")
             .replace(/[^a-z0-9-]/g, "")
