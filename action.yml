@@ -1,0 +1,13 @@
+name: 'Generate TOC'
+description: 'Generate Table of Contents for Markdown files'
+inputs:
+  files:
+    description: 'Files to generate TOC for'
+    required: true
+    default: 'README.md'
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
+runs:
+  using: 'node16'
+  main: 'index.js'
