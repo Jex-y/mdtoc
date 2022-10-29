@@ -25,6 +25,7 @@ const generateToc = (fileData) => {
 
         const id = newTitle
             .toLowerCase()
+            .slice(depth + 1)
             .trim()
             .replace(/ /g, "-")
             .replace(/[^a-z0-9-]/g, "")
@@ -36,8 +37,6 @@ const generateToc = (fileData) => {
         } else {
             IDs[id] = 1;
         }
-
-        // Should add an id like 1.2.3 before the title
 
         if (depth > prevDepth) {
             indexes.push(1);
@@ -59,7 +58,7 @@ const generateToc = (fileData) => {
     });
 
     const output = fileData.replace(tocRegex, `$1\n${toc}$3`);
-    console.log(output);
+    // console.log(output);
     return output;
 };
 
@@ -70,6 +69,7 @@ const repeateString = (string, times) => {
     }
     return toc;
 };
+
 const globs = core.getInput("files").split(" ");
 
 globs.forEach((globPath) => {
