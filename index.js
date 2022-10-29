@@ -27,17 +27,18 @@ const generateToc = (fileData) => {
         }
 
         const number = indexes.slice(1).join(".");
-        const newTitle = `${repeateString("#", depth)} ${
-            number ? number + " " : ""
-        }${title.replace(/(\d\.)*\d /, "").slice(depth + 1)}`;
+        const newTitleTOC = `${number ? number + " " : ""}${title
+            .replace(/(\d\.)*\d /, "")
+            .slice(depth + 1)}`;
+        const newTitle = `${repeateString("#", depth)} ${newTitleTOC}`;
 
         const id = newTitle
             .toLowerCase()
             .slice(depth + 1)
             .replace(/[^a-z0-9- ]/g, "")
             .trim()
-            .replace(/ /g, "-")
-            .replace(/-+/g, "-");
+            .replace(/ +/g, "-")
+            .replace(/ /g, "-");
 
         if (IDs[id]) {
             IDs[id]++;
@@ -51,7 +52,7 @@ const generateToc = (fileData) => {
         toc += `${repeateString(
             " ",
             (depth - 1) * 2
-        )}- [${newTitle}](#${id})\n`;
+        )}- [${newTitleTOC}](#${id})\n`;
 
         fileData = fileData.replace(title, newTitle);
     });
